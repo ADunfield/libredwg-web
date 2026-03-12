@@ -7419,8 +7419,8 @@ add_block_preview (Dwg_Object *restrict obj, Bit_Chain *restrict dat,
       dxf_free_pair (pair);
       pair = dxf_read_pair (dat);
     }
-  _obj->preview_size = written & 0xFFFFFFFF;
-  LOG_TRACE ("BLOCK_HEADER.preview_size = %" PRIuSIZE " [BL 0]\n", written);
+  _obj->preview_size = (BITCODE_BLL)written;
+  LOG_TRACE ("BLOCK_HEADER.preview_size = %" PRIuSIZE " [BLL 0]\n", written);
   return pair;
 }
 

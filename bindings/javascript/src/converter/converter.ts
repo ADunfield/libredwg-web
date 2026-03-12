@@ -266,6 +266,26 @@ export class LibreDwgConverter {
     const flags = libredwg.dwg_dynapi_entity_value(item, 'flag').data as number
     const description = libredwg.dwg_dynapi_entity_value(item, 'description')
       .data as string
+
+    // XRef fields
+    const blkisxref = libredwg.dwg_dynapi_entity_value(item, 'blkisxref')
+      .data as number
+    const xrefoverlaid = libredwg.dwg_dynapi_entity_value(item, 'xrefoverlaid')
+      .data as number
+    const isXRef = !!(blkisxref || (flags & 4))
+    const isXRefOverlay = !!(xrefoverlaid || (flags & 8))
+    let xrefPathName: string | undefined
+    let xrefLoaded: boolean | undefined
+    if (isXRef || isXRefOverlay) {
+      xrefPathName =
+        (libredwg.dwg_dynapi_entity_value(item, 'xref_pname')
+          .data as string) || undefined
+      const xref_loaded_val = libredwg.dwg_dynapi_entity_value(
+        item,
+        'xref_loaded'
+      ).data as number
+      xrefLoaded = !!xref_loaded_val
+    }
     const basePoint = libredwg.dwg_dynapi_entity_value(item, 'base_pt')
       .data as DwgPoint3D
     const insertionUnits = libredwg.dwg_dynapi_entity_value(
@@ -331,6 +351,10 @@ export class LibreDwgConverter {
       explodability: explodability,
       scalability: scalability,
       bmpPreview: bmpPreview,
+      isXRef: isXRef || undefined,
+      isXRefOverlay: isXRefOverlay || undefined,
+      xrefPathName: xrefPathName,
+      xrefLoaded: xrefLoaded,
       entities: entities
     }
   }

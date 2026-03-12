@@ -49,6 +49,28 @@ export interface DwgBlockRecordTableEntry extends DwgCommonTableEntry {
    */
   bmpPreview?: string
   /**
+   * Whether this block is an external reference (xref).
+   * Derived from flags bit 4 and the blkisxref field.
+   */
+  isXRef?: boolean
+  /**
+   * Whether this xref is an overlay (true) or an attachment (false).
+   * Overlays are not transitively loaded through nested xrefs.
+   * Derived from flags bit 8 and the xrefoverlaid field.
+   */
+  isXRefOverlay?: boolean
+  /**
+   * The file path of the external reference DWG file.
+   * This is the path stored in the DWG file (may be relative or absolute).
+   * Only present when isXRef is true.
+   */
+  xrefPathName?: string
+  /**
+   * Whether the xref was loaded/resolved when the file was last saved.
+   * Only present when isXRef is true. (R2000+)
+   */
+  xrefLoaded?: boolean
+  /**
    * All of entities in this block record
    */
   entities: DwgEntity[]

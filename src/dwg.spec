@@ -3686,7 +3686,14 @@ DWG_TABLE (BLOCK_HEADER)
       FIELD_T (description, 4);
 
 #ifndef IS_JSON
-      FIELD_BL (preview_size, 0);
+      VERSIONS (R_2000b, R_2007)
+        {
+          FIELD_CAST (preview_size, RL, BLL, 0);
+        }
+      SINCE (R_2010b)
+        {
+          FIELD_BLL (preview_size, 0);
+        }
 #endif
       VALUEOUTOFBOUNDS (preview_size, 0xa00000)
       else

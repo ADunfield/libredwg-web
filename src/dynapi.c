@@ -7495,7 +7495,7 @@ static const Dwg_DYNAPI_field _dwg_BLOCK_HEADER_fields[] = {
     0,0,0, 0 },
   { "description",	"T", sizeof (BITCODE_TV),  OFF (struct _dwg_object_BLOCK_HEADER, description),
     1,1,1, 4 },
-  { "preview_size",	"BL", sizeof (BITCODE_BL),  OFF (struct _dwg_object_BLOCK_HEADER, preview_size),
+  { "preview_size",	"BLL", sizeof (BITCODE_BLL),  OFF (struct _dwg_object_BLOCK_HEADER, preview_size),
     0,0,0, 0 },
   { "preview",	"TF", sizeof (BITCODE_TF),  OFF (struct _dwg_object_BLOCK_HEADER, preview),
     1,1,0, 310 },
